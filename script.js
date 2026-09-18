@@ -2,9 +2,9 @@
 // One change updates every "Book a call" CTA and the embedded booking popup.
 const CALENDLY_URL = '';
 
-// Mobile stability pass.
-// Keep layout sizing in one place and avoid replacing brand assets at runtime,
-// which previously caused header layout shift and disturbed the hero viewport math.
+// Mobile stability + composition pass.
+// The complete hero stays inside the visible phone viewport, while the copy
+// is optically centered instead of being crushed into the bottom half.
 const mobileStyles = document.createElement('style');
 mobileStyles.textContent = `
   html,body{max-width:100%;overflow-x:hidden}
@@ -61,24 +61,25 @@ mobileStyles.textContent = `
       min-height:0!important;
       height:100%!important;
       display:flex!important;
-      align-items:flex-end!important;
+      align-items:center!important;
     }
     .hero-copy{
       width:100%!important;
       max-width:none!important;
       max-height:100%;
-      padding:18px 0 max(16px,env(safe-area-inset-bottom))!important;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
+      padding:12px 0 max(12px,env(safe-area-inset-bottom))!important;
+      display:flex!important;
+      flex-direction:column!important;
+      justify-content:center!important;
+      transform:translateY(clamp(20px,3.2svh,30px));
     }
     .hero-media{
-      background-position:67% center!important;
+      background-position:64% 58%!important;
       transform:scale(1.01)!important;
     }
     .hero-shade{
       background:
-        linear-gradient(0deg,rgba(5,5,5,.98) 0%,rgba(5,5,5,.91) 54%,rgba(5,5,5,.38) 100%)!important;
+        linear-gradient(0deg,rgba(5,5,5,.985) 0%,rgba(5,5,5,.90) 45%,rgba(5,5,5,.48) 73%,rgba(5,5,5,.28) 100%)!important;
     }
     .eyebrow{
       font-size:8px!important;
@@ -88,15 +89,16 @@ mobileStyles.textContent = `
     }
     .eyebrow span{width:18px!important}
     .hero h1{
-      font-size:clamp(36px,min(11.3vw,5.75svh),52px)!important;
-      line-height:.94!important;
+      font-size:clamp(37px,min(10.8vw,5.45svh),48px)!important;
+      line-height:.95!important;
       margin-top:10px!important;
       letter-spacing:-.052em!important;
+      text-wrap:balance;
     }
     .hero-lede{
       max-width:96%!important;
       margin-top:11px!important;
-      font-size:clamp(12px,1.52svh,14px)!important;
+      font-size:clamp(12px,1.48svh,14px)!important;
       line-height:1.42!important;
     }
     .hero-actions{
@@ -119,12 +121,12 @@ mobileStyles.textContent = `
       text-align:center!important;
       font-size:10px!important;
       line-height:1.2!important;
-      padding:1px 0!important;
+      padding:2px 0!important;
     }
     .hero-proof{
       display:grid!important;
       grid-template-columns:repeat(3,minmax(0,1fr))!important;
-      gap:8px!important;
+      gap:10px!important;
       margin-top:12px!important;
       padding-top:10px!important;
       border-top:1px solid rgba(255,255,255,.13)!important;
@@ -146,22 +148,20 @@ mobileStyles.textContent = `
       font-size:7px!important;
       line-height:1.2!important;
       overflow-wrap:anywhere;
+      color:#8f8f8f!important;
     }
 
-    /* Keep the real ANZ logo stable in the footer too. */
     .footer-brand .brand-logo-img{
       width:auto!important;
       height:38px!important;
       max-width:160px!important;
     }
 
-    /* Clean mobile section transitions. */
     .day-night{padding-bottom:28px!important}
     .proof{padding-top:38px!important}
     .mode-grid{margin-bottom:0!important}
     .proof-grid{gap:22px!important}
 
-    /* Sticky CTA: always show the action container, respect iPhone safe area. */
     body{padding-bottom:calc(80px + env(safe-area-inset-bottom))!important}
     .sticky-inner{
       min-height:80px!important;
@@ -203,8 +203,12 @@ mobileStyles.textContent = `
       --mobile-header-h:54px;
     }
     .site-header .brand-logo-img{height:31px!important;max-width:138px!important}
-    .hero-copy{padding-top:10px!important;padding-bottom:10px!important}
-    .hero h1{font-size:clamp(34px,min(10.8vw,5.55svh),46px)!important}
+    .hero-copy{
+      padding-top:8px!important;
+      padding-bottom:8px!important;
+      transform:translateY(12px)!important;
+    }
+    .hero h1{font-size:clamp(34px,min(10.3vw,5.2svh),44px)!important}
     .hero-lede{font-size:12px!important;line-height:1.36!important;margin-top:9px!important}
     .hero-actions{margin-top:10px!important;gap:7px!important}
     .hero-actions .btn{min-height:39px!important}
@@ -212,9 +216,16 @@ mobileStyles.textContent = `
   }
 
   @media (max-width:740px) and (max-height:690px){
+    .hero-copy{transform:none!important}
     .hero-watch{display:none!important}
     .hero-proof span{display:none!important}
     .hero-proof{margin-top:8px!important;padding-top:7px!important}
+  }
+
+  @media (max-width:390px){
+    .hero h1{font-size:clamp(35px,10.4vw,41px)!important}
+    .hero-copy{transform:translateY(14px)}
+    .hero-proof{gap:6px!important}
   }
 
   @media (max-width:360px){
