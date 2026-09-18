@@ -2,7 +2,8 @@
 // One change updates every "Book a call" CTA and the embedded booking popup.
 const CALENDLY_URL = '';
 
-// Exact first iPhone-fit hero pass from commit 9555ce2.
+// Exact first iPhone-fit hero pass from commit 9555ce2,
+// with the content block vertically centered instead of bottom-aligned.
 // Reference: iPhone 14 Pro Max portrait, 430 x 932 CSS px.
 const mobileHeroStyles = document.createElement('style');
 mobileHeroStyles.textContent = `
@@ -18,7 +19,7 @@ mobileHeroStyles.textContent = `
     .hero-inner{
       min-height:0!important;
       height:100%;
-      align-items:flex-end;
+      align-items:center;
     }
     .hero-copy{
       width:100%;
