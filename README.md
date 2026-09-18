@@ -6,7 +6,7 @@ First-draft jewellery-store landing page for Fog Bandit ANZ, structured around P
 - `index.html` — landing page content and sections
 - `styles.css` — responsive design system
 - `script.js` — assessment CTA behaviour
-- `public/jewellery-fog-hero.png` — hero visual
+- Hosted showroom photography is loaded from Unsplash so the draft stays lightweight and portable.
 
 ## Local preview
 ```bash
