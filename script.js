@@ -240,3 +240,46 @@ document.addEventListener('mouseout', (event) => {
   if (!CALENDLY_URL || window.matchMedia('(max-width: 740px)').matches || popupShown) return;
   if (event.clientY <= 0 && !event.relatedTarget) openCalendlyPopup({ automatic: true });
 });
+
+// Official Fog Bandit ANZ branding supplied by the client.
+const BRAND_LOGO = 'assets/logo-fog-bandit-anz-lockup.png';
+const BRAND_FAVICON = 'assets/favicon.png';
+const BRAND_OG = 'assets/og-image.png';
+
+document.querySelectorAll('a.brand').forEach((brand) => {
+  brand.innerHTML = `<img src="${BRAND_LOGO}" alt="Fog Bandit ANZ" class="official-brand-logo">`;
+});
+
+const brandStyles = document.createElement('style');
+brandStyles.textContent = `
+  .official-brand-logo{display:block;width:180px;height:auto;max-width:100%}
+  .site-header .official-brand-logo{width:176px}
+  .footer .official-brand-logo{width:164px}
+  @media(max-width:740px){
+    .site-header .official-brand-logo{width:142px}
+    .footer .official-brand-logo{width:150px}
+  }
+`;
+document.head.appendChild(brandStyles);
+
+let faviconLink = document.querySelector('link[rel="icon"]');
+if (!faviconLink) {
+  faviconLink = document.createElement('link');
+  faviconLink.rel = 'icon';
+  document.head.appendChild(faviconLink);
+}
+faviconLink.type = 'image/png';
+faviconLink.href = BRAND_FAVICON;
+
+const setMeta = (property, content) => {
+  let meta = document.head.querySelector(`meta[property="${property}"]`);
+  if (!meta) {
+    meta = document.createElement('meta');
+    meta.setAttribute('property', property);
+    document.head.appendChild(meta);
+  }
+  meta.setAttribute('content', content);
+};
+setMeta('og:image', BRAND_OG);
+setMeta('og:title', 'Fog Bandit for Jewellers | Active Security Fog');
+setMeta('og:description', 'Active security fog for jewellery stores across Australia and New Zealand.');
