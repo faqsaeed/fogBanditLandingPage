@@ -6,11 +6,16 @@
   <meta name="theme-color" content="#090909" />
   <meta name="description" content="Fog Bandit active security fog for jewellery stores. Reduce the response gap by rapidly removing visibility when a robbery or burglary begins." />
   <title>Fog Bandit for Jewellers | Active Security Fog</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta property="og:title" content="Fog Bandit for Jewellers | Active Security Fog" />
+  <meta property="og:description" content="Active security fog for jewellery stores across Australia & New Zealand." />
+  <meta property="og:image" content="assets/og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <style>
+    .brand-logo-img{display:block;width:auto;height:48px;object-fit:contain}.footer-brand .brand-logo-img{height:44px}
     /* High-attention bottom conversion bar */
     .sticky-cta{
       background:linear-gradient(105deg,#b80d0d 0%,#d41414 44%,#ea1c1c 100%);
@@ -34,8 +39,11 @@
     .sticky-badge{
       display:inline-flex;
       align-items:center;
+      justify-content:center;
+      width:max-content;
+      flex:0 0 auto;
       min-height:28px;
-      padding:0 10px;
+      padding:0 11px;
       border-radius:999px;
       background:#fff;
       color:#b70d0d;
@@ -44,6 +52,7 @@
       white-space:nowrap;
       box-shadow:0 5px 16px rgba(0,0,0,.12);
     }
+    .sticky-inner .sticky-badge{color:#b70d0d!important}
     .sticky-inner strong{color:#fff;font-size:16px}
     .sticky-inner span{color:rgba(255,255,255,.76)}
     .sticky-actions{gap:10px}
@@ -77,6 +86,7 @@
     @keyframes stickySweep{to{transform:translateX(120%)}}
     @keyframes ctaPulse{0%,100%{box-shadow:0 10px 24px rgba(0,0,0,.23)}50%{box-shadow:0 10px 24px rgba(0,0,0,.23),0 0 0 5px rgba(255,255,255,.18)}}
     @media(max-width:740px){
+      .brand-logo-img{height:39px}.footer-brand .brand-logo-img{height:38px}
       body{padding-bottom:80px}
       .sticky-cta{background:linear-gradient(105deg,#bd0d0d,#e21919);box-shadow:0 -8px 28px rgba(212,20,20,.28)}
       .sticky-inner{min-height:80px;padding:10px 11px}
@@ -97,9 +107,8 @@
   </div>
 
   <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="Fog Bandit home">
-      <span class="brand-mark" aria-hidden="true">FB</span>
-      <span class="brand-name">FOG <strong>BANDIT</strong></span>
+    <a class="brand" href="#top" aria-label="Fog Bandit ANZ home">
+      <img class="brand-logo-img" src="assets/logo-fog-bandit-anz-lockup.png" alt="Fog Bandit ANZ" />
     </a>
     <nav class="nav" aria-label="Primary navigation">
       <a href="#problem">Why it matters</a>
@@ -247,7 +256,7 @@
 
   <footer class="footer">
     <div class="shell footer-inner">
-      <a class="brand footer-brand" href="#top"><span class="brand-mark">FB</span><span class="brand-name">FOG <strong>BANDIT</strong></span></a>
+      <a class="brand footer-brand" href="#top" aria-label="Fog Bandit ANZ home"><img class="brand-logo-img" src="assets/logo-fog-bandit-anz-lockup.png" alt="Fog Bandit ANZ" /></a>
       <p>Active security fog for jewellery stores across Australia & New Zealand.</p>
       <a href="#assessment">Security assessment →</a>
     </div>
