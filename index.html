@@ -10,6 +10,85 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* High-attention bottom conversion bar */
+    .sticky-cta{
+      background:linear-gradient(105deg,#b80d0d 0%,#d41414 44%,#ea1c1c 100%);
+      border-top:1px solid rgba(255,255,255,.26);
+      box-shadow:0 -12px 42px rgba(212,20,20,.28),0 -1px 0 rgba(255,255,255,.08) inset;
+      backdrop-filter:blur(18px);
+      overflow:hidden;
+    }
+    .sticky-cta:before{
+      content:'';
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.08) 45%,transparent 70%);
+      transform:translateX(-110%);
+    }
+    .sticky-cta.visible:before{animation:stickySweep 1.2s ease .4s 1}
+    .sticky-inner{position:relative;z-index:1;min-height:82px}
+    .sticky-copy{display:flex!important;flex-direction:row!important;align-items:center;gap:14px!important}
+    .sticky-copy-text{display:flex;flex-direction:column;gap:3px}
+    .sticky-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      background:#fff;
+      color:#b70d0d;
+      font:800 9px/1 var(--display);
+      letter-spacing:.11em;
+      white-space:nowrap;
+      box-shadow:0 5px 16px rgba(0,0,0,.12);
+    }
+    .sticky-inner strong{color:#fff;font-size:16px}
+    .sticky-inner span{color:rgba(255,255,255,.76)}
+    .sticky-actions{gap:10px}
+    .sticky-call{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border:1px solid rgba(255,255,255,.65);
+      border-radius:7px;
+      color:#fff;
+      text-decoration:none;
+      font-size:11px;
+      font-weight:800;
+      transition:.2s;
+    }
+    .sticky-call:hover{background:rgba(255,255,255,.12);border-color:#fff}
+    .sticky-cta .sticky-assessment-btn{
+      position:relative;
+      min-height:48px;
+      padding:0 24px;
+      background:#090909;
+      color:#fff;
+      box-shadow:0 10px 24px rgba(0,0,0,.23);
+    }
+    .sticky-cta .sticky-assessment-btn:hover{background:#000;transform:translateY(-2px)}
+    .sticky-arrow{font-size:16px;margin-left:8px;color:#fff!important;transition:transform .2s}
+    .sticky-assessment-btn:hover .sticky-arrow{transform:translateX(3px)}
+    .sticky-cta.visible .sticky-assessment-btn{animation:ctaPulse 2.7s ease 1.2s 2}
+    @keyframes stickySweep{to{transform:translateX(120%)}}
+    @keyframes ctaPulse{0%,100%{box-shadow:0 10px 24px rgba(0,0,0,.23)}50%{box-shadow:0 10px 24px rgba(0,0,0,.23),0 0 0 5px rgba(255,255,255,.18)}}
+    @media(max-width:740px){
+      body{padding-bottom:80px}
+      .sticky-cta{background:linear-gradient(105deg,#bd0d0d,#e21919);box-shadow:0 -8px 28px rgba(212,20,20,.28)}
+      .sticky-inner{min-height:80px;padding:10px 11px}
+      .sticky-copy{display:none!important}
+      .sticky-actions{grid-template-columns:.68fr 1.32fr;gap:8px}
+      .sticky-call{min-height:54px;padding:0 8px;border-color:rgba(255,255,255,.72);background:rgba(100,0,0,.18)}
+      .sticky-cta .sticky-assessment-btn{min-height:54px;background:#fff;color:#b70d0d;font-size:10px;padding:0 11px;box-shadow:0 8px 22px rgba(74,0,0,.22)}
+      .sticky-cta .sticky-assessment-btn:hover{background:#fff}
+      .sticky-arrow{color:#b70d0d!important;margin-left:5px}
+    }
+    @media(prefers-reduced-motion:reduce){.sticky-cta.visible:before,.sticky-cta.visible .sticky-assessment-btn{animation:none}}
+  </style>
 </head>
 <body>
   <div class="top-banner">
@@ -76,23 +155,11 @@
       </div>
 
       <div class="shell gap-card" aria-label="The response gap">
-        <div class="gap-node">
-          <span>01</span>
-          <strong>Break-in</strong>
-          <small>Entry is forced.</small>
-        </div>
+        <div class="gap-node"><span>01</span><strong>Break-in</strong><small>Entry is forced.</small></div>
         <div class="gap-track"><b>THE RESPONSE GAP</b><i></i></div>
-        <div class="gap-node danger">
-          <span>02</span>
-          <strong>Jewellery exposed</strong>
-          <small>Seconds become losses.</small>
-        </div>
+        <div class="gap-node danger"><span>02</span><strong>Jewellery exposed</strong><small>Seconds become losses.</small></div>
         <div class="gap-track plain"><i></i></div>
-        <div class="gap-node">
-          <span>03</span>
-          <strong>Help arrives</strong>
-          <small>Security or police respond.</small>
-        </div>
+        <div class="gap-node"><span>03</span><strong>Help arrives</strong><small>Security or police respond.</small></div>
       </div>
 
       <div class="shell security-contrast">
@@ -104,10 +171,7 @@
 
     <section class="section solution" id="solution">
       <div class="shell solution-head">
-        <div>
-          <div class="section-kicker light">THE SOLUTION</div>
-          <h2>Make the store disappear <span>before the jewellery does.</span></h2>
-        </div>
+        <div><div class="section-kicker light">THE SOLUTION</div><h2>Make the store disappear <span>before the jewellery does.</span></h2></div>
         <div class="solution-copy">
           <p>Watch what happens when Fog Bandit is activated in a real jewellery security incident.</p>
           <div class="solution-actions">
@@ -119,18 +183,9 @@
 
       <div class="shell video-shell">
         <div class="video-frame">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/kFrU9rAYJto?rel=0&modestbranding=1"
-            title="Fog Bandit jewellery robbery footage"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/kFrU9rAYJto?rel=0&modestbranding=1" title="Fog Bandit jewellery robbery footage" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
-        <div class="video-caption">
-          <span class="live-dot"></span>
-          <strong>Real jewellery robbery footage</strong>
-          <span>Bandit UK documented incident</span>
-        </div>
+        <div class="video-caption"><span class="live-dot"></span><strong>Real jewellery robbery footage</strong><span>Bandit UK documented incident</span></div>
       </div>
 
       <div class="shell three-steps">
@@ -141,63 +196,28 @@
     </section>
 
     <section class="section day-night">
-      <div class="shell day-night-head">
-        <div class="section-kicker">ONE SYSTEM. TWO RISKS.</div>
-        <h2>Protection while you trade.<br><span>Protection after you lock up.</span></h2>
-      </div>
+      <div class="shell day-night-head"><div class="section-kicker">ONE SYSTEM. TWO RISKS.</div><h2>Protection while you trade.<br><span>Protection after you lock up.</span></h2></div>
       <div class="shell mode-grid">
-        <article class="mode-card day">
-          <div class="mode-tag">DAYTIME ROBBERY</div>
-          <h3>Give staff a way to change the situation.</h3>
-          <p>Configured panic activation can rapidly obscure at-risk assets and break an attacker’s visual access to the shop floor.</p>
-        </article>
-        <article class="mode-card night">
-          <div class="mode-tag">AFTER-HOURS BURGLARY</div>
-          <h3>Turn an empty showroom into a useless target.</h3>
-          <p>When an intrusion is confirmed, Fog Bandit can obscure visible stock while response is on the way.</p>
-        </article>
+        <article class="mode-card day"><div class="mode-tag">DAYTIME ROBBERY</div><h3>Give staff a way to change the situation.</h3><p>Configured panic activation can rapidly obscure at-risk assets and break an attacker’s visual access to the shop floor.</p></article>
+        <article class="mode-card night"><div class="mode-tag">AFTER-HOURS BURGLARY</div><h3>Turn an empty showroom into a useless target.</h3><p>When an intrusion is confirmed, Fog Bandit can obscure visible stock while response is on the way.</p></article>
       </div>
     </section>
 
     <section class="section proof" id="proof">
       <div class="shell proof-grid">
-        <div class="proof-copy">
-          <div class="section-kicker light">PROVEN IN JEWELLERY</div>
-          <h2>Built for stores where <span>seconds carry a serious price tag.</span></h2>
-          <p>Bandit UK documents Fog Bandit use across jewellery boutiques, diamond rooms, daytime robberies and after-hours burglary protection.</p>
-        </div>
-        <blockquote class="quote-card">
-          <div class="quote-mark">“</div>
-          <p>We had four armed robbers… two of the girls hit the buttons and they were off.</p>
-          <footer><strong>R L Austen Jewellers</strong><span>Bandit UK customer feedback</span></footer>
-        </blockquote>
+        <div class="proof-copy"><div class="section-kicker light">PROVEN IN JEWELLERY</div><h2>Built for stores where <span>seconds carry a serious price tag.</span></h2><p>Bandit UK documents Fog Bandit use across jewellery boutiques, diamond rooms, daytime robberies and after-hours burglary protection.</p></div>
+        <blockquote class="quote-card"><div class="quote-mark">“</div><p>We had four armed robbers… two of the girls hit the buttons and they were off.</p><footer><strong>R L Austen Jewellers</strong><span>Bandit UK customer feedback</span></footer></blockquote>
       </div>
     </section>
 
     <section class="section faq" id="faq">
       <div class="shell faq-grid">
-        <div class="faq-intro">
-          <div class="section-kicker">BEFORE YOU DECIDE</div>
-          <h2>Four questions jewellers usually ask.</h2>
-          <p>Everything else can be covered during the store assessment.</p>
-        </div>
+        <div class="faq-intro"><div class="section-kicker">BEFORE YOU DECIDE</div><h2>Four questions jewellers usually ask.</h2><p>Everything else can be covered during the store assessment.</p></div>
         <div class="accordion">
-          <details>
-            <summary>Will the fog damage jewellery or displays?</summary>
-            <p>Fog Bandit materials state that its security fog is harmless and leaves no residue. Store-specific suitability should still be confirmed during the assessment.</p>
-          </details>
-          <details>
-            <summary>Can it work with my existing alarm?</summary>
-            <p>Yes. Fog Bandit is designed to operate as an active layer alongside existing intrusion and panic-alarm systems, with the exact trigger logic configured during installation.</p>
-          </details>
-          <details>
-            <summary>How much coverage does my store need?</summary>
-            <p>That depends on room volume, layout and the assets at risk. The 320 series includes configurations for approximately 40–200m³ spaces.</p>
-          </details>
-          <details>
-            <summary>Can the same system protect us during the day and at night?</summary>
-            <p>Yes. Jewellery applications can be configured for panic activation during trading hours and intrusion-triggered protection after closing.</p>
-          </details>
+          <details><summary>Will the fog damage jewellery or displays?</summary><p>Fog Bandit materials state that its security fog is harmless and leaves no residue. Store-specific suitability should still be confirmed during the assessment.</p></details>
+          <details><summary>Can it work with my existing alarm?</summary><p>Yes. Fog Bandit is designed to operate as an active layer alongside existing intrusion and panic-alarm systems, with the exact trigger logic configured during installation.</p></details>
+          <details><summary>How much coverage does my store need?</summary><p>That depends on room volume, layout and the assets at risk. The 320 series includes configurations for approximately 40–200m³ spaces.</p></details>
+          <details><summary>Can the same system protect us during the day and at night?</summary><p>Yes. Jewellery applications can be configured for panic activation during trading hours and intrusion-triggered protection after closing.</p></details>
         </div>
       </div>
     </section>
@@ -210,25 +230,13 @@
           <h2>Find out what your store <span>actually needs.</span></h2>
           <p>Tell us about your shop, current security and the stock you need to protect. We’ll help determine whether Fog Bandit fits and what coverage makes sense.</p>
           <div class="micro-proof"><span>✓</span> Store-specific recommendation <span>✓</span> No generic package</div>
-          <div class="calendar-card">
-            <div>
-              <span class="calendar-icon" aria-hidden="true">▣</span>
-              <div><strong>Prefer to talk it through?</strong><small>Book a short call with the Fog Bandit team.</small></div>
-            </div>
-            <a class="btn btn-ghost calendly-link" href="#" data-calendly>Book 15 minutes</a>
-          </div>
+          <div class="calendar-card"><div><span class="calendar-icon" aria-hidden="true">▣</span><div><strong>Prefer to talk it through?</strong><small>Book a short call with the Fog Bandit team.</small></div></div><a class="btn btn-ghost calendly-link" href="#" data-calendly>Book 15 minutes</a></div>
         </div>
         <form class="assessment-form" id="assessment-form">
           <div class="form-heading"><strong>Request your assessment</strong><span>Usually takes under a minute.</span></div>
-          <div class="form-row">
-            <label>First name<input name="firstName" autocomplete="given-name" required></label>
-            <label>Last name<input name="lastName" autocomplete="family-name" required></label>
-          </div>
+          <div class="form-row"><label>First name<input name="firstName" autocomplete="given-name" required></label><label>Last name<input name="lastName" autocomplete="family-name" required></label></div>
           <label>Jewellery store / company<input name="company" autocomplete="organization" required></label>
-          <div class="form-row">
-            <label>Email<input type="email" name="email" autocomplete="email" required></label>
-            <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
-          </div>
+          <div class="form-row"><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
           <label>What are you most concerned about?<textarea name="requirements" rows="3" placeholder="Smash-and-grab, daytime robbery, overnight burglary..."></textarea></label>
           <button class="btn btn-primary btn-full" type="submit">Get my free store assessment</button>
           <p class="form-note">No newsletter. No generic quote. Just a store-specific security conversation.</p>
@@ -247,10 +255,13 @@
 
   <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="shell sticky-inner">
-      <div><strong>Worried about smash-and-grab theft?</strong><span>See what your jewellery store needs.</span></div>
+      <div class="sticky-copy">
+        <span class="sticky-badge">FREE ASSESSMENT</span>
+        <div class="sticky-copy-text"><strong>How exposed is your jewellery store?</strong><span>Get a store-specific Fog Bandit recommendation.</span></div>
+      </div>
       <div class="sticky-actions">
         <a class="sticky-call calendly-link" href="#" data-calendly>Book a call</a>
-        <a class="btn btn-primary" href="#assessment">Get my free assessment</a>
+        <a class="btn sticky-assessment-btn" href="#assessment">Get my free assessment <span class="sticky-arrow">→</span></a>
       </div>
     </div>
   </div>
