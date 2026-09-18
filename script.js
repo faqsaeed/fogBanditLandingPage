@@ -54,6 +54,27 @@ if (popup) {
         <iframe class="calendly-frame" title="Book a Fog Bandit consultation" loading="lazy" allow="payment"></iframe>
       </div>
     </div>`;
+
+  const modalStyles = document.createElement('style');
+  modalStyles.textContent = `
+    .calendly-modal{width:min(940px,calc(100vw - 36px));padding:0;overflow:hidden;background:#f7f6f3;border-radius:18px}
+    .calendly-modal .popup-close{z-index:2;top:14px;right:16px;background:#111;color:#fff;border-radius:50%;font-size:21px;line-height:1}
+    .calendly-modal-head{padding:24px 62px 20px 26px;background:#fff;border-bottom:1px solid #e5e1da;display:flex;align-items:end;justify-content:space-between;gap:24px}
+    .calendly-modal-head h2{font-size:28px;line-height:1.05;margin:8px 0 0}
+    .calendly-modal-head>span{font-size:10px;color:#777;white-space:nowrap;padding-bottom:3px}
+    .calendly-frame-wrap{height:min(680px,78vh);background:#fff}
+    .calendly-frame{width:100%;height:100%;border:0;display:block;background:#fff}
+    @media(max-width:740px){
+      .popup-backdrop{padding:8px}
+      .calendly-modal{width:100%;max-height:94vh;border-radius:14px}
+      .calendly-modal-head{padding:18px 52px 15px 18px;align-items:flex-start;flex-direction:column;gap:4px}
+      .calendly-modal-head h2{font-size:22px}
+      .calendly-modal-head>span{display:none}
+      .calendly-frame-wrap{height:76vh}
+      .calendly-modal .popup-close{top:10px;right:10px}
+    }
+  `;
+  document.head.appendChild(modalStyles);
 }
 
 const popupClose = popup?.querySelector('.popup-close');
