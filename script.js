@@ -2,18 +2,32 @@
 // One change updates every "Book a call" CTA and the embedded booking popup.
 const CALENDLY_URL = '';
 
-// Exact first iPhone-fit hero pass from commit 9555ce2,
-// with the content block vertically centered instead of bottom-aligned.
-// Reference: iPhone 14 Pro Max portrait, 430 x 932 CSS px.
+// First-screen mobile composition.
+// Banner + header + hero + jewellery trust strip fit inside one phone viewport.
+// Hero content remains vertically centered.
 const mobileHeroStyles = document.createElement('style');
 mobileHeroStyles.textContent = `
   @media (max-width:740px){
-    .top-banner{min-height:40px;padding:6px 10px}
-    .site-header{height:58px;padding:0 15px}
+    :root{
+      --mobile-banner-h:40px;
+      --mobile-header-h:58px;
+      --mobile-trust-h:96px;
+    }
+
+    .top-banner{
+      height:var(--mobile-banner-h)!important;
+      min-height:var(--mobile-banner-h)!important;
+      padding:6px 10px!important;
+    }
+    .site-header{
+      height:var(--mobile-header-h)!important;
+      min-height:var(--mobile-header-h)!important;
+      padding:0 15px!important;
+    }
     .hero{
       min-height:0!important;
-      height:calc(100vh - 98px);
-      height:calc(100svh - 98px);
+      height:calc(100vh - var(--mobile-banner-h) - var(--mobile-header-h) - var(--mobile-trust-h))!important;
+      height:calc(100svh - var(--mobile-banner-h) - var(--mobile-header-h) - var(--mobile-trust-h))!important;
       max-height:none;
     }
     .hero-inner{
@@ -23,8 +37,8 @@ mobileHeroStyles.textContent = `
     }
     .hero-copy{
       width:100%;
-      padding-top:clamp(16px,2.7svh,26px);
-      padding-bottom:max(16px,env(safe-area-inset-bottom));
+      padding-top:clamp(12px,2svh,20px);
+      padding-bottom:clamp(12px,2svh,20px);
     }
     .eyebrow{font-size:clamp(8px,1.15svh,9px);gap:8px}
     .eyebrow span{width:20px}
@@ -70,14 +84,33 @@ mobileHeroStyles.textContent = `
       line-height:1.25;
     }
     .hero-media{background-position:66% center}
+
+    /* Pull the four jewellery-use labels into the same first-screen composition. */
+    .trust-strip{
+      height:var(--mobile-trust-h)!important;
+      min-height:var(--mobile-trust-h)!important;
+      margin:0!important;
+    }
+    .trust-grid{
+      width:100%!important;
+      height:100%!important;
+      grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    }
+    .trust-grid div{
+      height:auto!important;
+      min-height:0!important;
+      padding:0 8px!important;
+      font-size:8px!important;
+      line-height:1.25!important;
+      text-align:center;
+    }
   }
 
   @media (max-width:740px) and (max-height:760px){
-    .top-banner{min-height:36px}
-    .site-header{height:54px}
-    .hero{
-      height:calc(100vh - 90px);
-      height:calc(100svh - 90px);
+    :root{
+      --mobile-banner-h:36px;
+      --mobile-header-h:54px;
+      --mobile-trust-h:88px;
     }
     h1{font-size:clamp(36px,min(11.5vw,6.1svh),48px)}
     .hero-lede{font-size:12px;line-height:1.38}
@@ -86,14 +119,15 @@ mobileHeroStyles.textContent = `
   }
 
   @media (max-width:740px) and (max-height:680px){
+    :root{--mobile-trust-h:80px}
     .hero-watch{display:none}
     .hero-proof span{display:none}
-    .hero-copy{padding-top:10px;padding-bottom:10px}
+    .hero-copy{padding-top:8px;padding-bottom:8px}
   }
 `;
 document.head.appendChild(mobileHeroStyles);
 
-// Later bug fixes that do not alter the first-fit hero composition.
+// Later bug fixes that do not alter the first-screen hero composition.
 const mobileFixStyles = document.createElement('style');
 mobileFixStyles.textContent = `
   html,body{max-width:100%;overflow-x:hidden}
