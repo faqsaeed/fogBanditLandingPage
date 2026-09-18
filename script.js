@@ -71,6 +71,13 @@ mobileHeroStyles.textContent = `
       line-height:1.25;
     }
     .hero-media{background-position:66% center}
+
+    /* Mobile section transition cleanup. Prevents stacked section padding
+       from creating a large white/black dead zone between cards and proof. */
+    .day-night{padding-bottom:24px!important}
+    .proof{padding-top:34px!important}
+    .mode-grid{margin-bottom:0!important}
+    .proof-grid{gap:20px!important}
   }
 
   @media (max-width:740px) and (max-height:760px){
