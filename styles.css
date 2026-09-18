@@ -10,3 +10,23 @@
 
 @media(max-width:740px){.hero-actions .btn-ghost{width:100%}.hero-watch{width:100%;text-align:center}.solution-actions{align-items:stretch;flex-direction:column;gap:14px}.solution-actions .btn{width:100%}.solution-actions .text-link{text-align:center}.calendar-card{align-items:stretch;flex-direction:column}.calendar-card .btn{width:100%}.sticky-actions{width:100%;display:grid;grid-template-columns:.74fr 1.26fr;gap:8px}.sticky-actions .sticky-call{display:flex;min-height:52px;align-items:center;justify-content:center;border:1px solid #393939;border-radius:7px;padding:0;color:#fff}.sticky-actions .btn{min-width:0;padding:0 10px;font-size:9px}.sticky-inner .sticky-actions .btn{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.sticky-cta,.popup-backdrop,.popup-card{transition:none}}
+
+/* Mobile floating CTA visibility fix */
+@media(max-width:740px){
+  .sticky-inner>.sticky-actions{
+    display:grid!important;
+    width:100%!important;
+    grid-template-columns:.68fr 1.32fr!important;
+    align-items:center!important;
+    gap:8px!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  .sticky-inner>.sticky-copy{display:none!important}
+  .sticky-inner>.sticky-actions .sticky-call,
+  .sticky-inner>.sticky-actions .sticky-assessment-btn{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+}
