@@ -1,5 +1,7 @@
 # Fog Bandit Jewellery Landing Page
 
+**Current release: V2 — jewellery-specific PAS landing page with real incident video, sticky CTA, popup CTA, responsive mobile/desktop layout, and Calendly booking path.**
+
 V2 jewellery-store landing page for Fog Bandit ANZ, built around PAS and shortened for paid-traffic conversion.
 
 ## V2 conversion structure
