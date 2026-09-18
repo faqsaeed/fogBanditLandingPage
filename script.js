@@ -2,166 +2,34 @@
 // One change updates every "Book a call" CTA and the embedded booking popup.
 const CALENDLY_URL = '';
 
-// Mobile stability + composition pass.
-// The complete hero stays inside the visible phone viewport, while the copy
-// is optically centered instead of being crushed into the bottom half.
-const mobileStyles = document.createElement('style');
-mobileStyles.textContent = `
+// Keep only the mobile bug fixes added after the original design.
+// Hero/header composition is intentionally left to styles.css so it renders
+// exactly like the original responsive version again.
+const mobileFixStyles = document.createElement('style');
+mobileFixStyles.textContent = `
   html,body{max-width:100%;overflow-x:hidden}
 
   @media (max-width:740px){
-    :root{
-      --mobile-banner-h:40px;
-      --mobile-header-h:58px;
-    }
-
-    .top-banner{
-      height:var(--mobile-banner-h)!important;
-      min-height:var(--mobile-banner-h)!important;
-      padding:0 12px!important;
-      display:flex!important;
-      align-items:center!important;
-      justify-content:center!important;
-      overflow:hidden;
-    }
-    .top-banner p{display:none!important}
-    .top-banner a{
-      font-size:10px!important;
-      line-height:1.15!important;
-      white-space:nowrap;
-    }
-
-    .site-header{
-      height:var(--mobile-header-h)!important;
-      min-height:var(--mobile-header-h)!important;
-      padding:0 15px!important;
-      align-items:center!important;
-      overflow:hidden;
-    }
-    .site-header .brand{
-      height:100%;
-      display:flex;
-      align-items:center;
-    }
+    /* Keep the real ANZ logo stable without changing original header sizing. */
     .site-header .brand-logo-img{
       width:auto!important;
-      height:34px!important;
-      max-width:150px!important;
+      height:39px!important;
+      max-width:160px!important;
       object-fit:contain;
-      flex:0 0 auto;
     }
-
-    .hero{
-      min-height:0!important;
-      height:calc(100vh - var(--mobile-banner-h) - var(--mobile-header-h))!important;
-      height:calc(100svh - var(--mobile-banner-h) - var(--mobile-header-h))!important;
-      overflow:hidden!important;
-    }
-    .hero-inner{
-      min-height:0!important;
-      height:100%!important;
-      display:flex!important;
-      align-items:center!important;
-    }
-    .hero-copy{
-      width:100%!important;
-      max-width:none!important;
-      max-height:100%;
-      padding:12px 0 max(12px,env(safe-area-inset-bottom))!important;
-      display:flex!important;
-      flex-direction:column!important;
-      justify-content:center!important;
-      transform:translateY(clamp(20px,3.2svh,30px));
-    }
-    .hero-media{
-      background-position:64% 58%!important;
-      transform:scale(1.01)!important;
-    }
-    .hero-shade{
-      background:
-        linear-gradient(0deg,rgba(5,5,5,.985) 0%,rgba(5,5,5,.90) 45%,rgba(5,5,5,.48) 73%,rgba(5,5,5,.28) 100%)!important;
-    }
-    .eyebrow{
-      font-size:8px!important;
-      line-height:1.2!important;
-      gap:7px!important;
-      letter-spacing:.15em!important;
-    }
-    .eyebrow span{width:18px!important}
-    .hero h1{
-      font-size:clamp(37px,min(10.8vw,5.45svh),48px)!important;
-      line-height:.95!important;
-      margin-top:10px!important;
-      letter-spacing:-.052em!important;
-      text-wrap:balance;
-    }
-    .hero-lede{
-      max-width:96%!important;
-      margin-top:11px!important;
-      font-size:clamp(12px,1.48svh,14px)!important;
-      line-height:1.42!important;
-    }
-    .hero-actions{
-      display:flex!important;
-      flex-direction:column!important;
-      align-items:stretch!important;
-      gap:8px!important;
-      margin-top:13px!important;
-    }
-    .hero-actions .btn{
-      width:100%!important;
-      min-height:42px!important;
-      padding:0 14px!important;
-      font-size:10px!important;
-      line-height:1.15!important;
-      white-space:nowrap;
-    }
-    .hero-watch{
-      width:100%!important;
-      text-align:center!important;
-      font-size:10px!important;
-      line-height:1.2!important;
-      padding:2px 0!important;
-    }
-    .hero-proof{
-      display:grid!important;
-      grid-template-columns:repeat(3,minmax(0,1fr))!important;
-      gap:10px!important;
-      margin-top:12px!important;
-      padding-top:10px!important;
-      border-top:1px solid rgba(255,255,255,.13)!important;
-    }
-    .hero-proof div,
-    .hero-proof div:nth-child(3){
-      grid-column:auto!important;
-      min-width:0!important;
-      padding:0!important;
-      border:0!important;
-      gap:3px!important;
-    }
-    .hero-proof strong{
-      font-size:11px!important;
-      line-height:1.15!important;
-      white-space:nowrap;
-    }
-    .hero-proof span{
-      font-size:7px!important;
-      line-height:1.2!important;
-      overflow-wrap:anywhere;
-      color:#8f8f8f!important;
-    }
-
     .footer-brand .brand-logo-img{
       width:auto!important;
       height:38px!important;
       max-width:160px!important;
     }
 
+    /* Keep the section-spacing bug fix. */
     .day-night{padding-bottom:28px!important}
     .proof{padding-top:38px!important}
     .mode-grid{margin-bottom:0!important}
     .proof-grid{gap:22px!important}
 
+    /* Keep the mobile floating CTA fix and iPhone safe area support. */
     body{padding-bottom:calc(80px + env(safe-area-inset-bottom))!important}
     .sticky-inner{
       min-height:80px!important;
@@ -196,47 +64,8 @@ mobileStyles.textContent = `
       white-space:nowrap;
     }
   }
-
-  @media (max-width:740px) and (max-height:780px){
-    :root{
-      --mobile-banner-h:36px;
-      --mobile-header-h:54px;
-    }
-    .site-header .brand-logo-img{height:31px!important;max-width:138px!important}
-    .hero-copy{
-      padding-top:8px!important;
-      padding-bottom:8px!important;
-      transform:translateY(12px)!important;
-    }
-    .hero h1{font-size:clamp(34px,min(10.3vw,5.2svh),44px)!important}
-    .hero-lede{font-size:12px!important;line-height:1.36!important;margin-top:9px!important}
-    .hero-actions{margin-top:10px!important;gap:7px!important}
-    .hero-actions .btn{min-height:39px!important}
-    .hero-proof{margin-top:9px!important;padding-top:8px!important}
-  }
-
-  @media (max-width:740px) and (max-height:690px){
-    .hero-copy{transform:none!important}
-    .hero-watch{display:none!important}
-    .hero-proof span{display:none!important}
-    .hero-proof{margin-top:8px!important;padding-top:7px!important}
-  }
-
-  @media (max-width:390px){
-    .hero h1{font-size:clamp(35px,10.4vw,41px)!important}
-    .hero-copy{transform:translateY(14px)}
-    .hero-proof{gap:6px!important}
-  }
-
-  @media (max-width:360px){
-    .site-header .brand-logo-img{height:30px!important;max-width:132px!important}
-    .hero h1{font-size:35px!important}
-    .hero-lede{max-width:100%!important}
-    .hero-actions .btn{font-size:9px!important}
-    .hero-proof strong{font-size:10px!important}
-  }
 `;
-document.head.appendChild(mobileStyles);
+document.head.appendChild(mobileFixStyles);
 
 const form = document.getElementById('assessment-form');
 form?.addEventListener('submit', (event) => {
@@ -266,14 +95,17 @@ if (sticky && hero && assessment && 'IntersectionObserver' in window) {
     sticky.classList.toggle('visible', shouldShow);
     sticky.setAttribute('aria-hidden', String(!shouldShow));
   };
+
   new IntersectionObserver(([entry]) => {
     heroVisible = entry.isIntersecting;
     syncSticky();
   }, { threshold: 0.08 }).observe(hero);
+
   new IntersectionObserver(([entry]) => {
     assessmentVisible = entry.isIntersecting;
     syncSticky();
   }, { threshold: 0.1 }).observe(assessment);
+
   syncSticky();
 }
 
